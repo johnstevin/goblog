@@ -2,6 +2,7 @@ package main
 import (
 	"github.com/astaxie/beego"
 	"github.com/johnstevin/goblog/app/models"
+	"github.com/johnstevin/goblog/app/controllers"
 	"net/http"
 	"html/template"
 )
@@ -14,6 +15,8 @@ func main() {
 	
 	models.Init()
 	beego.AppConfig.Set("version", VERSION)
+	beego.Router("/user/index", &controllers.UserController{}, "*:Index")
+	beego.Router("/user/list", &controllers.UserController{}, "*:List")
 	beego.Run()
 }
 

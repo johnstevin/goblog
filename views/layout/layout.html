@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8">
+    <title>{{.pageTitle}}::{{.siteName}} v{{.version}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">    
+</head>
+
+<body>
+
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	<i class="icon-user"></i> 
+	{{.loginUserName}}
+	<b class="caret"></b>
+</a>
+
+<ul class="dropdown-menu">
+	<li><a href="/profile">修改资料</a></li>
+	<li><a href="/logout">退出登录</a></li>
+</ul>						
+
+<div class="container">
+ 	
+{{.LayoutContent}}
+ 	
+</div>
+
+
+</body>
+</html>
