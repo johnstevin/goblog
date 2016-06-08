@@ -30,3 +30,12 @@ func (this *BaseController) display(tpl ...string) {
 	this.Layout = "layout/layout.html"
 	this.TplName = tplname
 }
+
+func (this *BaseController) redirect(url string) {
+	this.Redirect(url, 302)
+	this.StopRun()
+}
+
+func (this *BaseController) isPost() bool {
+	return this.Ctx.Request.Method == "POST"
+}

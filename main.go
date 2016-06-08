@@ -15,6 +15,7 @@ func main() {
 	
 	models.Init()
 	beego.AppConfig.Set("version", VERSION)
+	beego.Router("/login", &controllers.MainController{}, "*:Login")
 	beego.Router("/user/index", &controllers.UserController{}, "*:Index")
 	beego.Router("/user/list", &controllers.UserController{}, "*:List")
 	beego.Run()
