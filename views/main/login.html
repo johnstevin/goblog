@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8">
+    <title>登录 - {{.siteName}}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+
+<body>
+<form action="/login" method="post">	
+	<h1>管理员登录</h1>			
+	<div class="login-fields">
+	
+		<p class="text-error">{{.flash.error}}&nbsp;</p>
+		
+		<div class="field">
+			<label for="username">帐号</label>
+			<input type="text" id="username" name="username" value="" placeholder="Username" class="login username-field" />
+		</div> <!-- /field -->
+		
+		<div class="field">
+			<label for="password">密码</label>
+			<input type="password" id="password" name="password" value="" placeholder="Password" class="login password-field"/>
+		</div> <!-- /password -->
+		
+	</div> <!-- /login-fields -->
+	
+	<div class="login-actions">	
+		<span class="login-checkbox">
+			<input id="remember" name="remember" type="checkbox" class="field login-checkbox" value="1" tabindex="4">
+			<label class="choice" for="remember">一周内自动登录</label>
+		</span>
+				
+		<button type="submit">登 录</button>
+	</div> <!-- .actions -->	
+</form>
+</body>
+</html>
