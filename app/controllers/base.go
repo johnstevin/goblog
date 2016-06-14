@@ -39,3 +39,8 @@ func (this *BaseController) redirect(url string) {
 func (this *BaseController) isPost() bool {
 	return this.Ctx.Request.Method == "POST"
 }
+
+func (this *BaseController) getClientIp() string {
+	s := strings.Split(this.Ctx.Request.RemoteAddr, ":")
+	return s[0]
+}

@@ -21,6 +21,7 @@ func Init() {
 		dsn = dsn + "&loc=" + url.QueryEscape(timezone)
 	}
 	orm.RegisterDataBase("default", "mysql", dsn)
+	orm.RegisterModel(new(User))
 	if beego.AppConfig.String("runmode") == "dev" {
 		orm.Debug = true
 	}
