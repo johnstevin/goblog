@@ -27,6 +27,15 @@ func GetUserByName(userName string) (*User, error) {
 	return u,nil
 }
 
+func GetUserById(userId int) (*User, error) {
+	u := new(User)
+	err := orm.NewOrm().QueryTable(u.TableName()).Filter("id", userId).One(u)
+	if err != nil {
+		return nil, err
+	}
+	return u,nil
+}
+
 func UserUpdate(user *User, fields ...string) error {
 	_, err := orm.NewOrm().Update(user, fields...)
 	return err

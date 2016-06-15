@@ -1,23 +1,52 @@
 package controllers
 import (
 	"github.com/astaxie/beego"
+	"github.com/johnstevin/goblog/app/models"
+	"github.com/johnstevin/goblog/app/libs"
 	"strings"
-	//"fmt"
+	"strconv"
 )
 
 type BaseController struct {
 	beego.Controller
 	controllerName string
 	actionName     string
+
+	userId         int
+	userName       string
+	user           *models.User
 }
 
 func (this *BaseController) Prepare() {
 	controllerName, actionName := this.GetControllerAndAction()
-	//fmt.Printf("%s",controllerName)
 	this.controllerName = strings.ToLower(controllerName[0 : len(controllerName)-10])
 	this.actionName     = strings.ToLower(actionName)
+
+	this.auth()
+
 	this.Data["version"] = beego.AppConfig.String("version")
 	this.Data["siteName"] = beego.AppConfig.String("site.name")
+}
+
+func (this *BaseController) auth() {
+	arr := strings.Split(this.Ctx.GetCookie("auth"), "|")
+	if len(arr) == 2 {
+		idstr, password := arr[0], arr[1]
+		userId, _ := strconv.Atoi(idstr)
+		if userId > 0 {
+			user, err := models.GetUserById(userId)
+			if err == nil && password == libs.Md5([]byte(this.getClientIp()+"|"+user.Password+user.Salt)) {
+				this.userId = user.Id
+				this.userName = user.UserName
+				this.user = user
+			}
+		}
+	}
+
+	if this.userId == 0 && (this.controllerName != "main" || 
+								(this.controllerName == "main" && this.actionName != "logout" && this.actionName != "login")) {
+		this.redirect(beego.URLFor("MainController.Login"))
+	}
 }
 
 func (this *BaseController) display(tpl ...string) {

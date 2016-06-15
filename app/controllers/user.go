@@ -17,3 +17,7 @@ func (this *UserController) List() {
 	this.Data["pageTitle"] = "好友列表"
 	this.display()
 }
+
+func (this *UserController) Profile() {
+	
+}

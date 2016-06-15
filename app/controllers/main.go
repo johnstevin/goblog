@@ -13,6 +13,9 @@ type MainController struct {
 }
 
 func (this *MainController) Login() {
+	if this.userId > 0 {
+		this.redirect(beego.URLFor("UserController.Index"))
+	}
 	beego.ReadFromRequest(&this.Controller)
 	
 	if this.isPost() {
