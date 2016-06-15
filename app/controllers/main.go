@@ -54,3 +54,8 @@ func (this *MainController) Login() {
 	}
 	this.TplName = "main/login.html"
 }
+
+func (this *MainController) Logout() {
+	this.Ctx.SetCookie("auth","")
+	this.redirect(beego.URLFor("MainController.Login"))
+}
